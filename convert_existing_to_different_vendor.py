@@ -38,14 +38,21 @@ def pull_data(from_db, to_db, tables='*'):
         #        c.type.lengty = 50
         print 'Creating table on destination server'
         table.metadata.create_all(dengine)
-        NewRecord = quick_mapper(table)
-        columns = table.columns.keys()
-        print 'Transferring records'
-        for record in source.query(table).all():
-            data = dict(
-                [(str(column), getattr(record, column)) for column in columns]
-            )
-            destination.merge(NewRecord(**data))
+        if table_name == 'alembic_version':
+            # This table doesn't have primary key, so
+            # you can't get a mapper on that. Also you can 
+            # just use the stamp command to get it
+            # populated.
+            pass
+        else:
+            NewRecord = quick_mapper(table)
+            columns = table.columns.keys()
+            print 'Transferring records'
+            for record in source.query(table).all():
+                data = dict(
+                    [(str(column), getattr(record, column)) for column in columns]
+                )
+                destination.merge(NewRecord(**data))
     print 'Committing changes'
     destination.commit()
 
