@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 import getopt
 import sys
+
 from sqlalchemy import create_engine, MetaData, Table
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
+
+from sqlalchemy_utils import functions as sqlalclhemy_util_functions
 
 def make_session(connection_string):
     engine = create_engine(connection_string, echo=False, convert_unicode=True)
@@ -11,14 +14,28 @@ def make_session(connection_string):
     return Session(), engine
 
 def pull_data(from_db, to_db, tables='*'):
+
     source, sengine = make_session(from_db)
     smeta = MetaData(bind=sengine)
     destination, dengine = make_session(to_db)
+    
+    if not sqlalclhemy_util_functions.database_exists(to_db):
+        sqlalclhemy_util_functions.create_database(dengine.url)
+
+    # handle tall tables
+    if len(tables) == 1 and tables[0] == '*':
+        smeta.reflect()
+        tables = smeta.sorted_tables
+        tables = [table.name for table in tables]
 
     for table_name in tables:
         print 'Processing', table_name
         print 'Pulling schema from source server'
         table = Table(table_name, smeta, autoload=True)
+        #Ugly hack for varchar field without
+        #for c in table.columns:
+        #    if 'VARCHAR' in str(c.type) and c.type.length is None:
+        #        c.type.lengty = 50
         print 'Creating table on destination server'
         table.metadata.create_all(dengine)
         NewRecord = quick_mapper(table)
@@ -39,6 +56,8 @@ Usage: %s -f source_server -t destination_server table [table ...]
 
 Example: %s -f oracle://someuser:PaSsWd@db1/TSH1 \\
     -t mysql://root@db2:3307/reporting table_one table_two
+    
+Note: To convert all tables over, use '*' as table_one argument
     """ % (sys.argv[0], sys.argv[0])
 
 def quick_mapper(table):
@@ -54,6 +73,8 @@ if __name__ == '__main__':
     if '-f' not in options or '-t' not in options or not tables:
         print_usage()
         raise SystemExit, 1
+    
+    print tables
 
     pull_data(
         options['-f'],
