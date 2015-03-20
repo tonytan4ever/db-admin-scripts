@@ -14,8 +14,8 @@ class Cloud(Base):
     __tablename__ = 'cloud'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
-    description = Column(String, nullable=False)
+    name = Column(String(length=50), nullable=False)
+    description = Column(String(250), nullable=False)
 
     def __str__(self):
         return self.name
@@ -26,9 +26,9 @@ class Machine(Base):
     __tablename__ = 'machine'
 
     id = Column(Integer, primary_key=True)
-    hostname = Column(String, nullable=False)
-    operating_system = Column(String, nullable=False)
-    description = Column(String, nullable=False)
+    hostname = Column(String(100), nullable=False)
+    operating_system = Column(String(50), nullable=False)
+    description = Column(String(250), nullable=False)
     cloud_id = Column(Integer, ForeignKey('cloud.id'))
     cloud = relationship('Cloud')
     is_running = Column(Boolean, default=False, nullable=False)

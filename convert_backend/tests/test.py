@@ -40,6 +40,7 @@ class TestConvertBackend(unittest.TestCase):
     
     def test_convert_logic(self):
         convert_existing_to_different_vendor.pull_data(
+          #'mysql://root@192.168.59.103:3306/test_to_db',
           "sqlite:////test_from_db.db",
           "sqlite:////test_to_db.db",
           ['*']
