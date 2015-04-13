@@ -8,10 +8,11 @@ from OpenSSL import crypto
 pp = pprint.PrettyPrinter(indent=4)
 
 # Python 3 does not have ssl.PROTOCOL_SSLv2
-try:                             # pragma: no cover
-    sslv2 = ssl.PROTOCOL_SSLv2   # pragma: no cover
-except AttributeError:           # pragma: no cover
-    sslv2 = None                 # pragma: no cover
+try:                                        # pragma: no cover
+    extra_versions = [ssl.PROTOCOL_SSLv2]   # pragma: no cover
+except AttributeError:                      # pragma: no cover
+    extra_versions = [ssl.PROTOCOL_TLSv1_1,  # pragma: no cover
+                      ssl.PROTOCOL_TLSv1_2]  # pragma: no cover
 
 ssl_versions = [
     ssl.PROTOCOL_SSLv3,
@@ -19,8 +20,7 @@ ssl_versions = [
     ssl.PROTOCOL_SSLv23
 ]
 
-if sslv2 is not None:            # pragma: no cover
-    ssl_versions.append(sslv2)   # pragma: no cover
+ssl_versions.extend(extra_versions)
 
 
 def get_remote_cert(remote_host):
