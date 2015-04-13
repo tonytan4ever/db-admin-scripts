@@ -1,6 +1,4 @@
 '''
-Cloud-88 Compute Node Deployment Script
-
 @author: Tony Tan
 '''
 from fabric.api import env, settings, hide, prompt
@@ -14,11 +12,6 @@ packages = [
     "python-dev",
     "python-setuptools"
 ]
-
-
-def apt_get(packages):
-    packages_string = ' '.join(packages)
-    sudo('apt-get -y --no-upgrade install %s' % packages_string)
 
 
 def install_prerequisite():

@@ -1,16 +1,10 @@
 '''
-Created on Mar 31, 2015
+Created on April 15th, 2015
 
 @author: tony7514
 '''
-from fabric.operations import run, put
+from fabric.operations import sudo
 
-
-def copy():
-    # make sure the root irectory is there!
-    run('mkdir -p /root')
-
-    # Put local nova-cloud88.tar to the root directory
-    # of the server
-    put('nova-cloud88.tar', '/root')
-    run('tar xvf nova-cloud88.tar')
+def apt_get_install(packages):
+    packages_string = ' '.join(packages)
+    sudo('apt-get -y --no-upgrade install %s' % packages_string)
