@@ -1,8 +1,11 @@
 import json
 import ssl
+import pprint
 import sys
 
 from OpenSSL import crypto
+
+pp = pprint.PrettyPrinter(indent=4)
 
 # Python 3 does not have ssl.PROTOCOL_SSLv2
 try:                             # pragma: no cover
@@ -44,4 +47,4 @@ if __name__ == "__main__":
     if len(sys.argv) != 2:
         print('Usage: %s <remote_host_you_want_get_cert_on>' % sys.argv[0])
         sys.exit(0)
-    print(get_remote_cert(sys.argv[1]))
+    pp.pprint(get_remote_cert(sys.argv[1]))

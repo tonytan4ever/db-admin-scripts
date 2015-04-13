@@ -44,7 +44,7 @@ def get_ssl_number_of_hosts(remote_host):
 
         # We can actually print all the Subject Alternative Names
         # for san in sans:
-        #    print san
+        #   print san
         result = len(sans)
         break
     else:
