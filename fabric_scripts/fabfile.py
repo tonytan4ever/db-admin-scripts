@@ -5,6 +5,8 @@ from fabric.api import env, settings, hide, prompt
 from fabric.operations import run, put, sudo
 from fabric.utils import warn
 
+from ubuntu import common
+
 env.hosts = ['root@166.78.114.252.bast']
 
 
@@ -15,7 +17,7 @@ packages = [
 
 
 def install_prerequisite():
-    apt_get(packages)
+    common.apt_get(packages)
     # create nova log path
     sudo('mkdir /var/log/nova')
     # install rabbitmq and mysqlserver
