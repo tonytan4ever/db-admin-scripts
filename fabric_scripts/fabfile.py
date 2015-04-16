@@ -11,7 +11,7 @@ env.hosts = ['root@166.78.114.252']
 
 
 packages = [
-    "python-dev",
+    "python2.7-dev",
     "python-setuptools"
 ]
 
