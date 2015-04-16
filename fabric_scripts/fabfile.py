@@ -17,7 +17,7 @@ packages = [
 
 
 def install_prerequisite():
-    common.apt_get(packages)
+    common.apt_get_install(packages)
     # create nova log path
     sudo('mkdir /var/log/nova')
     # install rabbitmq and mysqlserver
