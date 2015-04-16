@@ -7,7 +7,7 @@ from fabric.utils import warn
 
 from ubuntu import common
 
-env.hosts = ['root@166.78.114.252.bast']
+env.hosts = ['root@166.78.114.252']
 
 
 packages = [
