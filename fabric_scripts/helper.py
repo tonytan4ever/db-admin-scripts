@@ -78,15 +78,10 @@ def install_mysql(username=None, password=None, new_database=None, root_password
 
     sudo('apt-get install -y mysql-server')
 
-    options = [
-        '--batch',
-        '--raw',
-        '--skip-column-names',
-    ]
-
-    options.append('--user=%s' % quote('root'))
-    options.append('--password=%s' % quote(mysql_password))
-    options = ' '.join(options)
+    kwargs = {
+        'mysql_user': 'root',
+        'mysql_pasword': mysql_password
+    }
 
     with settings(hide('running')):
         if username:
@@ -94,21 +89,21 @@ def install_mysql(username=None, password=None, new_database=None, root_password
                 'name': username,
                 'password': password,
                 'host': 'localhost'
-            })
+            }, **kwargs)
 
         if new_database:
             mysql_query("CREATE DATABASE %(name)s CHARACTER SET %(charset)s COLLATE %(collate)s;" % {
                 'name': new_database,
                 'charset': 'utf8',
                 'collate': 'utf8_general_ci'
-            })
+            }, **kwargs)
 
         if username:
             mysql_query("GRANT ALL PRIVILEGES ON %(name)s.* TO '%(owner)s'@'%(owner_host)s' WITH GRANT OPTION;" % {
                 'name': new_database,
                 'owner': username,
                 'owner_host': 'localhost'
-            })
+            }, **kwargs)
 
 
 def install_pip():
