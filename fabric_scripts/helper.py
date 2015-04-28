@@ -80,7 +80,7 @@ def install_mysql(username=None, password=None, new_database=None, root_password
 
     kwargs = {
         'mysql_user': 'root',
-        'mysql_pasword': mysql_password
+        'mysql_password': mysql_password
     }
 
     print kwargs
