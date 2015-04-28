@@ -51,6 +51,8 @@ def mysql_query(query, **kwargs):
     if password:
         options.append('--password=%s' % quote(password))
     options = ' '.join(options)
+    
+    print options
 
     return sudo('mysql %(options)s --execute=%(query)s' % {
         'options': options,
