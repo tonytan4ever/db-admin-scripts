@@ -5,6 +5,7 @@ Created on April 15th, 2015
 '''
 from fabric.operations import sudo
 
+
 def apt_get_install(packages):
     sudo('add-apt-repository "deb http://archive.ubuntu.com/ubuntu $(lsb_release -sc) main universe restricted multiverse"')
     sudo('apt-get update')

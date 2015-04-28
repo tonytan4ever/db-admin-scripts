@@ -1,8 +1,9 @@
 from fabric.api import env
 from fabric.operations import sudo
 import helper
+import common
 
-env.hosts = ['root@166.78.112.168']
+env.hosts = ['root@162.209.97.56']
 
 
 def cloud_88_nova_compute_node():
@@ -13,5 +14,7 @@ def cloud_88_nova_compute_node():
     # python dependencies
     # helper.install_pip()
     # helper.install_python_packages()
-    # c
     sudo("mkdir /var/log/nova", user="root")
+
+    # upload cloud-88 tar file
+    # common.put_and_untar('nova-cloud88.tar', '/root')
