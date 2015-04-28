@@ -51,7 +51,7 @@ def mysql_query(query, **kwargs):
     if password:
         options.append('--password=%s' % quote(password))
     options = ' '.join(options)
-    
+
     print options
 
     return sudo('mysql %(options)s --execute=%(query)s' % {
@@ -69,10 +69,8 @@ def install_mysql(username=None, password=None, new_database=None, root_password
     if result.failed is False:
         warn('MySQL is already installed')
         return
-    if (root_password is None):
-        mysql_password = prompt('Please enter MySQL root password:')
-    else:
-        mysql_password = root_password
+
+    mysql_password = root_password or 'root'
     sudo('echo "mysql-server-5.0 mysql-server/root_password password ' \
                               '%s" | debconf-set-selections' % mysql_password)
     sudo('echo "mysql-server-5.0 mysql-server/root_password_again password ' \
