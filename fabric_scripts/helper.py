@@ -1,7 +1,7 @@
 '''
 @author: Tony Tan
 '''
-from fabric.api import env, settings, hide, prompt, puts
+from fabric.api import settings, hide, prompt, puts
 from fabric.context_managers import cd
 from fabric.operations import run, put, sudo
 from fabric.utils import warn
@@ -9,8 +9,6 @@ from pipes import quote
 
 from ubuntu import common
 import common as c_common
-
-env.hosts = ['root@166.78.114.252']
 
 
 packages = [
