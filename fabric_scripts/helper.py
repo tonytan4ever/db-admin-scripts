@@ -1,7 +1,7 @@
 '''
 @author: Tony Tan
 '''
-from fabric.api import settings, hide, prompt, puts
+from fabric.api import env, settings, hide, prompt, puts
 from fabric.context_managers import cd
 from fabric.operations import run, put, sudo
 from fabric.utils import warn
@@ -31,7 +31,7 @@ def install_rabbitmq():
     sudo('apt-get install -y rabbitmq-server')
 
 
-def mysql_query(query, use_sudo=True, **kwargs):
+def mysql_query(query, **kwargs):
     """
     Run a MySQL query.
     Adopted from:
