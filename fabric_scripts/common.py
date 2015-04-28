@@ -7,6 +7,10 @@ import os
 from fabric.operations import run, put
 
 
+def put_file(file_path, remote_path='/root'):
+    put(file_path, remote_path)
+
+
 def put_and_untar(file_path, remote_path='/root'):
     # make sure the root irectory is there!
     run('mkdir -p /root')
@@ -15,6 +19,6 @@ def put_and_untar(file_path, remote_path='/root'):
     # of the server
     if not os.path.exists(file_path):
         raise ValueError("File %s does not exist" % file_path)
-    
-    put(file_path, remote_path)
+
+    put_file(file_path, remote_path)
     run('tar xvf %s' % file_path)
