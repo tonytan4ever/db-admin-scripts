@@ -2,7 +2,7 @@ from fabric.api import env
 from fabric.operations import sudo
 import helper
 
-env.hosts = ['root@166.78.112.69']
+env.hosts = ['root@166.78.112.168']
 
 
 def cloud_88_nova_compute_node():

@@ -76,7 +76,7 @@ def install_mysql(username=None, password=None, new_database=None, root_password
     sudo('echo "mysql-server-5.0 mysql-server/root_password_again password ' \
                               '%s" | debconf-set-selections' % mysql_password)
 
-    common.apt_get_install('mysql-server')
+    sudo('apt-get install -y mysql-server')
 
     options = [
         '--batch',
