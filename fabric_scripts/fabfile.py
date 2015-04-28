@@ -1,9 +1,10 @@
 from fabric.api import env
 from fabric.operations import sudo
+from fabric.context_managers import cd
 import helper
 import common
 
-env.hosts = ['root@162.209.99.116']
+env.hosts = ['root@162.209.102.74']
 
 
 def cloud_88_nova_compute_node():
@@ -17,4 +18,7 @@ def cloud_88_nova_compute_node():
     sudo("mkdir /var/log/nova", user="root")
 
     # upload cloud-88 tar file
-    # common.put_and_untar('nova-cloud88.tar', '/root')
+    common.put_and_untar('nova-cloud88.tar', '/root')
+
+    # sync nova taba
+    sudo("./nova-cloud88/bin/nova-manage db sync")
