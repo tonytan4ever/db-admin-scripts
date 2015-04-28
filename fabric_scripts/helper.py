@@ -83,6 +83,8 @@ def install_mysql(username=None, password=None, new_database=None, root_password
         'mysql_pasword': mysql_password
     }
 
+    print kwargs
+
     with settings(hide('running')):
         if username:
             mysql_query("CREATE USER '%(name)s'@'%(host)s' IDENTIFIED BY '%(password)s';" % {
