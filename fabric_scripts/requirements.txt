@@ -6,7 +6,7 @@ routes==1.13
 sqlalchemy-migrate==0.6.1
 eventlet==0.9.15
 webob==1.4.1
-M2Crypto==0.20.1
+M2Crypto
 boto==1.9b
 pbr==0.5.23
 netaddr==0.7.14
