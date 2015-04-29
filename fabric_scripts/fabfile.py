@@ -4,7 +4,7 @@ from fabric.context_managers import cd
 import helper
 import common
 
-env.hosts = ['root@162.209.99.116']
+env.hosts = ['root@104.130.24.93']
 
 
 def cloud_88_nova_compute_node():

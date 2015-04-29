@@ -15,7 +15,8 @@ packages = [
     "python2.7-dev",       #for ubuntu 12.04 this should be python-dev
     "python-setuptools",
     "build-essential",
-    "libmysqlclient-dev"
+    "libmysqlclient-dev",
+    'swig'
 ]
 
 
