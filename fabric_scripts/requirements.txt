@@ -1,7 +1,7 @@
 pip==1.5.4
 python-gflags==2.0
 sqlalchemy==0.6.3
-MySQL-Python==1.2.2
+MySQL-Python==1.2.3
 routes==1.13
 sqlalchemy-migrate==0.6.1
 eventlet==0.9.15
