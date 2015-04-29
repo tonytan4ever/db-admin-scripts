@@ -4,7 +4,7 @@ from fabric.context_managers import cd
 import helper
 import common
 
-env.hosts = ['root@162.209.102.74']
+env.hosts = ['root@162.209.99.116']
 
 
 def cloud_88_nova_compute_node():
@@ -18,7 +18,12 @@ def cloud_88_nova_compute_node():
     sudo("mkdir /var/log/nova", user="root")
 
     # upload cloud-88 tar file
-    common.put_and_untar('nova-cloud88.tar', '/root')
+    # common.put_and_untar('nova-cloud88.tar', '/root')
+
+    # upload and install glance-cloud88.
+    # common.put_and_untar('glance-cloud88.tar', '/root')
+    # with cd('/root/glance-cloud88'):
+    #    sudo('python setup.py install')
 
     # sync nova taba
-    sudo("./nova-cloud88/bin/nova-manage db sync")
+    # sudo("./nova-cloud88/bin/nova-manage db sync")

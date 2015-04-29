@@ -113,4 +113,4 @@ def install_pip():
 def install_python_packages(requirement_file_name='requirements.txt'):
     c_common.put_file(requirement_file_name)
     with cd('/root'):
-        run('pip install -r requirements.txt')
+        sudo('pip install -r requirements.txt')
